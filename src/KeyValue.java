@@ -1,5 +1,5 @@
 
-public class KeyValue <V>{
+public class KeyValue <V> {
 	protected int key;
 	protected V value;
 	
@@ -41,4 +41,5 @@ public class KeyValue <V>{
 	public String toString() {
 		return (key + " " + value);
 	}
+
 }

@@ -88,16 +88,14 @@ public class HeapMethods extends KeyValue  {
 	we have to set the last element as the root and therefore we must downheap to make it sorted
 	 */
 	public void minDownHeap(int index) {
-		if(((2* index) + 1 > heap.length - 1 || (2 * index) + 2 > heap.length - 1)) {
+		if(((2* index) + 1 > heap.length - 1 || (2 * index) + 2 > heap.length - 1))
 			return;
-		}
 
 		int leftChild = (2 * index) + 1;
 		int rightChild = (2 * index) + 2;
 
-		if(heap[leftChild] == null || heap[rightChild] == null) {
+		if(heap[leftChild] == null || heap[rightChild] == null)
 			return;
-		}
 		
 		if(heap[leftChild].getKey() < heap[rightChild].getKey()) {
 			if(heap[index].getKey() > heap[leftChild].getKey()) {
@@ -105,9 +103,9 @@ public class HeapMethods extends KeyValue  {
 				heap[index] = heap[leftChild];
 				heap[leftChild] = temp;
 				temp = null;
-				System.out.println(leftChild);
 				minDownHeap(leftChild);
 			}
+
 			minDownHeap(leftChild);
 		}
 		
@@ -119,6 +117,7 @@ public class HeapMethods extends KeyValue  {
 				temp = null;
 				minDownHeap(rightChild);
 			}
+
 			minDownHeap(rightChild);
 		}
 	}
@@ -186,6 +185,7 @@ public class HeapMethods extends KeyValue  {
 		for(int i = 0; i < heap.length; i++) {
 			if(heap[i] == null)
 				break;
+
 			newMinHeap.insert(heap[i].getKey(), heap[i].getValue());
 		}
 
@@ -193,7 +193,6 @@ public class HeapMethods extends KeyValue  {
 		
 		newMinHeap = null;
 		return;
-		
 	}
 
 	/*
@@ -216,7 +215,6 @@ public class HeapMethods extends KeyValue  {
 		newMaxHeap = null;
 
 		return;
-		
 	}
 
 	public void insert(int key, Object value) {
@@ -288,36 +286,36 @@ public class HeapMethods extends KeyValue  {
 	We can't do better than this since we have to swap every node (assuming worst case)
 	 */
 	public void toggle() {
-		if (isEmpty() || size() == 1) {
+		if (isEmpty() || size() == 1)
 			return;
-		}
 
 		if (state().equals("Min")) {
 			state = "Max";
 			sortMax(0);
-			
 		}
 
+		/*
+		No need to state and else if, but leaving it here for more readability
+		*/
 		else if (state().equals("Max")) {
 			state = "Min";
 			sortMin(0);
-			
 		}
 	}
 
 	public void switchToMin() {
-		if (isEmpty() || state().equals("Min")) {
+		if (isEmpty() || state().equals("Min"))
 			return;
-		}
+
 		state = "Min";
 		sortMin(0);
 		
 	}
 	
 	public void switchToMax() {
-		if (isEmpty() || state().equals("Max")) {
+		if (isEmpty() || state().equals("Max"))
 			return;
-		}
+
 		state = "Max";
 		sortMax(0);
 		
@@ -330,22 +328,24 @@ public class HeapMethods extends KeyValue  {
 	public boolean isInternal(int index) {
 		if(index >= heap.length)
 			return false;
+
 		return (isLeftChild(index) || isRightChild(index));
 	}
 	
 	public boolean isExternal(int index) {
 		if(index >= heap.length)
 			return false;
+
 		return (!(isLeftChild(index) && isRightChild(index)));
 	}
 	
 	public void heapPrint() {
 		for(int i = 0; i < heap.length; i++) {
-			if(heap[i] == null) {
+			if(heap[i] == null)
 				continue;
-			}
 
 			System.out.println("Index of the heap array: " + i + " and this is the key: " + heap[i].getKey());
 		}
 	}
+
 }
