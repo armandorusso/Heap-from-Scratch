@@ -1,4 +1,3 @@
-
 public class HeapMethods extends KeyValue  {
 
 	protected KeyValue[] heap;
@@ -29,6 +28,12 @@ public class HeapMethods extends KeyValue  {
 		return heap.length;
 	}
 
+	public boolean isEmpty() { return (heapSize == 0); }
+
+	public KeyValue top() { return heap[0]; }
+
+	public String state() { return state; }
+
 	public void increaseSize() {
 		KeyValue[] newHeap = new KeyValue[(heap.length * 2)];
 		keyValue = new KeyValue();
@@ -36,24 +41,23 @@ public class HeapMethods extends KeyValue  {
 			newHeap[i] = keyValue.clone(heap[i]);
 		}
 
-		heap = newHeap; //point the heap to the increased heap
-		newHeap = null; //since its being pointed to the variable we want, point this initial pointer to null since we don't want to have 2 pointers.
+		heap = newHeap; // Point the heap to the increased heap
+		newHeap = null; // Since its being pointed to the variable we want, point this initial pointer to null since we don't want to have 2 pointers.
 	}
-	
-	public void maxDownHeap(int index) { //this is used when we remove a node, we must resort the heap (in terms of max)
-		if(((2* index) + 1 > heap.length - 1 || (2 * index) + 2 > heap.length - 1)) {
+
+	/*
+	Used when we remove a node, we must resort the heap (in terms of max)
+	*/
+	public void maxDownHeap(int index) {
+		if(((2* index) + 1 > heap.length - 1 || (2 * index) + 2 > heap.length - 1))
 			return;
-		}
 		
 		int leftChild = (2 * index) + 1;
 		int rightChild = (2 * index) + 2;
 		
-		
-		
-		
-		if(heap[leftChild] == null || heap[rightChild] == null) {
+		if(heap[leftChild] == null || heap[rightChild] == null)
 			return;
-		}
+
 		if(heap[leftChild].getKey() > heap[rightChild].getKey()) {
 			if(heap[index].getKey() < heap[leftChild].getKey()) {
 				KeyValue temp = heap[index];
@@ -63,6 +67,7 @@ public class HeapMethods extends KeyValue  {
 				
 				maxDownHeap(leftChild);
 			}
+
 			maxDownHeap(leftChild);
 		}
 		
@@ -77,16 +82,19 @@ public class HeapMethods extends KeyValue  {
 			maxDownHeap(rightChild);
 		}
 	}
-	
-	
-	public void minDownHeap(int index) { //used for when we remove a node. We sort using downheaping since when we remove a node, we have to set the last element as the root and therefore we must downheap to make it sorted
-		
-	
+
+	/*
+	Used for when we remove a node. We sort using downheaping since when we remove a node,
+	we have to set the last element as the root and therefore we must downheap to make it sorted
+	 */
+	public void minDownHeap(int index) {
 		if(((2* index) + 1 > heap.length - 1 || (2 * index) + 2 > heap.length - 1)) {
 			return;
 		}
+
 		int leftChild = (2 * index) + 1;
 		int rightChild = (2 * index) + 2;
+
 		if(heap[leftChild] == null || heap[rightChild] == null) {
 			return;
 		}
@@ -114,16 +122,21 @@ public class HeapMethods extends KeyValue  {
 			minDownHeap(rightChild);
 		}
 	}
-	
-	public void min(int index) { //upheap method
+
+	/*
+	Up Heap Min Method
+	*/
+	public void min(int index) {
 		int parentIndex = index / 2;
+
 		if(index == 0 || heap[parentIndex] == null || heap[index] == null) {
 			KeyValue temp = heap[index];
 			heap[index] = heap[0];
 			heap[0] = temp;
 			temp = null;
 			return;
-	}
+		}
+
 		if(heap[parentIndex].getKey() > heap[index].getKey()) {
 			KeyValue temp = heap[parentIndex];
 			heap[parentIndex] = heap[index];
@@ -131,12 +144,16 @@ public class HeapMethods extends KeyValue  {
 			temp = null;
 			min(parentIndex);
 		}
+
 		min(parentIndex);
 	}
-	
-	
-	public void max(int index) { //upheap method
+
+	/*
+	Up Heap Max Method
+	*/
+	public void max(int index) {
 		int parentIndex = index / 2;
+
 		if(index == 0) {
 			KeyValue temp = heap[index];
 			heap[index] = heap[0];
@@ -144,6 +161,7 @@ public class HeapMethods extends KeyValue  {
 			temp = null;
 			return;
 		}
+
 		if(heap[parentIndex].getKey() < heap[index].getKey()) {
 			KeyValue temp = heap[parentIndex];
 			heap[parentIndex] = heap[index];
@@ -151,38 +169,40 @@ public class HeapMethods extends KeyValue  {
 			temp = null;
 			max(parentIndex);
 		}
+
 		max(parentIndex);
 	}
-	
-	public void sortMin(int index) { //essentially we are going to be doing an inorder traversal sort. this method is used when we are converting from max to min
-		
+
+	/*
+	Done using an inorder traversal sort. This method is used when we are converting from max to min
+	*/
+	public void sortMin(int index) {
 		if(isEmpty() || size() == 1) {
 			return;
 		}
-		
-		
+
 		HeapMethods newMinHeap = new HeapMethods(heap.length, state);
-		//KeyValue[] temp = heap;
-		//heap = newMinHeap;
 		
 		for(int i = 0; i < heap.length; i++) {
 			if(heap[i] == null)
 				break;
 			newMinHeap.insert(heap[i].getKey(), heap[i].getValue());
 		}
+
 		heap = newMinHeap.heap;
 		
 		newMinHeap = null;
 		return;
 		
 	}
-	
-	public void sortMax(int index) { //essentially we are going to be doing an inorder traversal sort. this method is used when we are converting from max to min
-		
+
+	/*
+	Done using an inorder traversal sort. This method is used when we are converting from max to min
+	 */
+	public void sortMax(int index) {
 		if(isEmpty() || size() == 1) {
 			return;
 		}
-		
 		
 		HeapMethods newMaxHeap = new HeapMethods(heap.length, state);
 		
@@ -191,109 +211,87 @@ public class HeapMethods extends KeyValue  {
 				break;
 			newMaxHeap.insert(heap[i].getKey(), heap[i].getValue());
 		}
+
 		heap = newMaxHeap.heap;
 		newMaxHeap = null;
 
 		return;
 		
 	}
-	
-	
-	public boolean isEmpty() {
-		return (heapSize == 0);
-	}
-
-	public KeyValue top() {
-		return heap[0];
-	}
 
 	public void insert(int key, Object value) {
 		KeyValue element = new KeyValue(key, value);
-		if (isEmpty()) { // if the heap is empty, just simply add it to the first entry of the array
+
+		/* If the heap is empty, just simply add it to the first entry of the array */
+		if (isEmpty()) {
 			heap[0] = element;
 			heapSize++;
 			index++;
-			
 			return;
 		}
 
-		if (size() == heap.length) { // if the heap is full, double its size and then insert
+	    /* If the heap is full, double its size and then insert */
+		if (size() == heap.length)
 			increaseSize();
-			index++;
-			heap[index] = element;
-			heapSize++;
-			
-			if (state().equals("Min"))
-				min(index); // sorting the heap
-			else {
-				max(index); //change to max up heap method
-			}
-			return;
 
-		}
 		index++;
-		heap[index] = element;// do a condition where you are adding it if its not full and its not empty
-		
+		heap[index] = element;
 		heapSize++;
 		
-		if (state.equals("Min")) {
-			
+		if (state.equals("Min"))
 			min(index);
-		} else {
-			max(index); // max up heap method
-		}
+		else
+			max(index);
+
 		return;
 	}
 
 	public KeyValue remove() {
-		if(isEmpty() || size() == 0 || index == -1) {
+		if(isEmpty() || size() == 0 || index == -1)
 			return null;
-		}
-		
+
 		if(size() == 1) {
-			
 			KeyValue keyvalue = top();
 			heap[0] = null;
 			heapSize--;
 			return keyvalue;
 		}
-		
 
-		KeyValue keyValue = top(); // storing the object from the top of the heap into a temporary variable which
-		
-									// we will return later
+		/*
+		Storing the object from the top of the heap into a temporary variable which
+		we will return later
+		*/
+		KeyValue keyValue = top();
 
-		 // setting this to null since we can (we are using an array to implement this
-						// ADT so this is fine)
-		
-		heap[0] = heap[index]; // setting the top of the tree equal to the last node (which should be the right)
-		
-								// most node on the very last level of the heap)
+		/*
+		Setting the top of the tree equal to the last node (which should be the right)
+		most node on the very last level of the heap)
+		 */
+		heap[0] = heap[index];
+
 		heap[index] = null;
 		index--;
 		heapSize--;
 
-		if (state.equals("Min")) {
+		if (state.equals("Min"))
 			minDownHeap(0);
-		}
 
-		else if(state.equals("Max")){
-			
-			maxDownHeap(0); 
-		}
+		else
+			maxDownHeap(0);
 
 		return keyValue;
 	}
 
-	public String state() {
-		return state;
-	}
-
-	public void toggle() { 
-		
+	/*
+	The tight big o of this would be O(n) where n is the number of nodes.
+	This is because we are doing an inorder traversal which goes through every node.
+	We can't do better than this since we have to swap every node (assuming worst case)
+	 */
+	public void toggle() {
 		if (isEmpty() || size() == 1) {
 			return;
 		}
+
 		if (state().equals("Min")) {
 			state = "Max";
 			sortMax(0);
@@ -305,8 +303,6 @@ public class HeapMethods extends KeyValue  {
 			sortMin(0);
 			
 		}
-		
-		//the tight big o of this would be O(n) where n is the number of nodes. This is because we are doing an inorder traversal which goes through every node. We can't do better than this since we have to literally swap every node (assuming worst case)
 	}
 
 	public void switchToMin() {
@@ -327,13 +323,9 @@ public class HeapMethods extends KeyValue  {
 		
 	}
 
-	public boolean isLeftChild(int index) {
-		return (heap[(2 * index) + 1] != null);
-	}
+	public boolean isLeftChild(int index) { return (heap[(2 * index) + 1] != null); }
 
-	public boolean isRightChild(int index) {
-		return (heap[(2 * index) + 2] != null);
-	}
+	public boolean isRightChild(int index) { return (heap[(2 * index) + 2] != null); }
 
 	public boolean isInternal(int index) {
 		if(index >= heap.length)
@@ -352,8 +344,8 @@ public class HeapMethods extends KeyValue  {
 			if(heap[i] == null) {
 				continue;
 			}
+
 			System.out.println("Index of the heap array: " + i + " and this is the key: " + heap[i].getKey());
 		}
 	}
-
 }
