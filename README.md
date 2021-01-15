@@ -24,4 +24,4 @@ No additional libraries used!
     <b>Best:</b> O(1) | <b>Worst:</b> O(n)
     
 - Swapping modes:<br> 
-    <b>Best:</b> O(1) | <b>Worst</b>: O(n)
+    <b>Best:</b> O(1) | <b>Worst (Tight Big O)</b>: O(n) (because we are doing an inorder traversal)
