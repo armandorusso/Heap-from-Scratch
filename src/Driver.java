@@ -12,9 +12,9 @@ public class Driver {
 			int randomNumber = random.nextInt(100);
 
 			if(randomSort < 50)
-				aBunchOfHeaps[i] = new HeapMethods(randomNumber, "Min");
+				aBunchOfHeaps[i] = new HeapMethods(randomNumber + 10, "Min");
 			else
-				aBunchOfHeaps[i] = new HeapMethods(randomNumber, "Max");
+				aBunchOfHeaps[i] = new HeapMethods(randomNumber + 10, "Max");
 		}
 
 		int numberToInsert = 0;
@@ -46,7 +46,7 @@ public class Driver {
 		/*
 		For fun: testing to see if we can obtain a sorted array by removing each element and putting it into a new array
 		 */
-		KeyValue[] sortedArray = new KeyValue[38];
+		KeyValue[] sortedArray = new KeyValue[aBunchOfHeaps[8].size()];
 		HeapMethods heap = aBunchOfHeaps[8];
 
 		for(int i = 0; i < sortedArray.length; i++) {

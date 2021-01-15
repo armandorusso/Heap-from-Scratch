@@ -180,9 +180,8 @@ public class HeapMethods extends KeyValue  {
     Done using an inorder traversal sort. This method is used when we are converting from max to min
     */
 	public void sortMin(int index) {
-		if(isEmpty() || size() == 1) {
+		if(isEmpty() || size() == 1)
 			return;
-		}
 
 		HeapMethods newMinHeap = new HeapMethods(heap.length, state);
 
@@ -203,9 +202,8 @@ public class HeapMethods extends KeyValue  {
     Done using an inorder traversal sort. This method is used when we are converting from max to min
      */
 	public void sortMax(int index) {
-		if(isEmpty() || size() == 1) {
+		if(isEmpty() || size() == 1)
 			return;
-		}
 
 		HeapMethods newMaxHeap = new HeapMethods(heap.length, state);
 
