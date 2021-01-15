@@ -1,4 +1,3 @@
-package src;
 import java.util.Random;
 
 public class Driver {
@@ -11,6 +10,7 @@ public class Driver {
 		for(int i = 0; i < aBunchOfHeaps.length; i++) {
 			int randomSort = random.nextInt(100);
 			int randomNumber = random.nextInt(100);
+
 			if(randomSort < 50)
 				aBunchOfHeaps[i] = new HeapMethods(randomNumber, "Min");
 			else
@@ -18,12 +18,12 @@ public class Driver {
 		}
 
 		int numberToInsert = 0;
-		while(numberToInsert != 20302) {
+		while(numberToInsert < 20302) {
 			for (int i = 0; i < aBunchOfHeaps.length; i++)
 				aBunchOfHeaps[i].insert(numberToInsert, numberToInsert += 26);
 			numberToInsert += 26;
 		}
-		
+
 		System.out.println("The removed element from heap 1: " + aBunchOfHeaps[0].remove());
 		System.out.println("The removed element from heap 3: " + aBunchOfHeaps[2].remove());
 		System.out.println("The removed element from heap 4: " + aBunchOfHeaps[3].remove());
@@ -34,10 +34,11 @@ public class Driver {
 		aBunchOfHeaps[14].sortMax(0);
 		aBunchOfHeaps[15].sortMin(0);
 		aBunchOfHeaps[11].toggle();
-		System.out.println(aBunchOfHeaps[0].top());
-			
+		System.out.println("Top of the first heap: " + aBunchOfHeaps[0].top() + "\n");
 
+		System.out.println("Printing a bunch of heaps!");
 		for(int i = 0; i < aBunchOfHeaps.length; i++) {
+			System.out.println("Heap number: " + (i + 1));
 			aBunchOfHeaps[i].heapPrint();
 			System.out.println("\n");
 		}
@@ -45,8 +46,8 @@ public class Driver {
 		/*
 		For fun: testing to see if we can obtain a sorted array by removing each element and putting it into a new array
 		 */
-		KeyValue[] sortedArray = new KeyValue[11];
-		HeapMethods heap = aBunchOfHeaps[0];
+		KeyValue[] sortedArray = new KeyValue[38];
+		HeapMethods heap = aBunchOfHeaps[8];
 
 		for(int i = 0; i < sortedArray.length; i++) {
 			sortedArray[i] = heap.remove();
