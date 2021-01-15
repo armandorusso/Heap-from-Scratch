@@ -1,8 +1,9 @@
-Heap from Scratch using Down Heaping.
+Binary Heap from Scratch using Down Heaping.
 
 No additional libraries used!
 
 <b>Features:</b>
+- Sorts any data type
 - Change heap sorting mode between min and max
 - Check for internal & external
 - If Heap is full, doubles the size of the heap
