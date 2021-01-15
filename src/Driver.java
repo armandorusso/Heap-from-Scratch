@@ -1,4 +1,5 @@
-import java.*;
+package src;
+import java.util.Random;
 
 public class Driver {
 
@@ -16,9 +17,10 @@ public class Driver {
 				aBunchOfHeaps[i] = new HeapMethods(randomNumber, "Max");
 		}
 
+		int numberToInsert = 0;
 		while(numberToInsert != 20302) {
 			for (int i = 0; i < aBunchOfHeaps.length; i++)
-				aBunchOfHeaps.insert(numberToInsert, numberToInsert += 26);
+				aBunchOfHeaps[i].insert(numberToInsert, numberToInsert += 26);
 			numberToInsert += 26;
 		}
 		
@@ -44,6 +46,7 @@ public class Driver {
 		For fun: testing to see if we can obtain a sorted array by removing each element and putting it into a new array
 		 */
 		KeyValue[] sortedArray = new KeyValue[11];
+		HeapMethods heap = aBunchOfHeaps[0];
 
 		for(int i = 0; i < sortedArray.length; i++) {
 			sortedArray[i] = heap.remove();

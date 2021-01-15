@@ -1,3 +1,4 @@
+package src;
 
 public class KeyValue <V> {
 	protected int key;

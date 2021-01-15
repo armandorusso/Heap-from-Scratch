@@ -1,3 +1,5 @@
+package src;
+
 public class HeapMethods extends KeyValue  {
 
 	protected KeyValue[] heap;
@@ -37,6 +39,7 @@ public class HeapMethods extends KeyValue  {
 	public void increaseSize() {
 		KeyValue[] newHeap = new KeyValue[(heap.length * 2)];
 		keyValue = new KeyValue();
+		
 		for (int i = 0; i < heap.length; i++) {
 			newHeap[i] = keyValue.clone(heap[i]);
 		}
